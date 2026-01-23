@@ -1,0 +1,44 @@
+Null value check 
+SELECT COUNT(*) FROM product WHERE product_id IS NULL;
+-No Null were value found
+
+Duplicate value check
+SELECT product_id, COUNT(*)
+FROM product
+GROUP BY product_id
+HAVING COUNT(*) > 1;
+-Duplicate rows were detected 
+
+Duplicate validation 
+select * from product where product_id ='OFF-AP-10000576';
+-Duplicates were confirmed as legitimate and therefore retained
+
+Excat duplicate removal
+  delete from product 
+where ctid in( 
+select ctid 
+from( 
+select ctid,
+row_number () over (
+partition by
+product_id, category, "sub-category", product_name 
+order by ctid) rn
+from product
+) t
+where rn > 1 );
+
+Column name standation 
+alter table product 
+rename column "sub-category" to
+sub_category; 
+
+Primary key creation 
+alter table product
+Add column unique_pr serial primary key;
+-introduced a surrogate primary key to ensure uniqueness and support relational joins 
+-preserved original columns to maintain source data integrity
+
+-No NULL values in key columns
+-Legitimate duplicates preserved
+-Exact duplicate rows removed
+-Table prepared for relationships in Power BI
