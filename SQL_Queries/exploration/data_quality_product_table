@@ -38,6 +38,11 @@ Add column unique_pr serial primary key;
 -introduced a surrogate primary key to ensure uniqueness and support relational joins 
 -preserved original columns to maintain source data integrity
 
+Data type check
+SELECT column_name, data_type
+FROM information_schema.columns
+WHERE table_name = 'product';
+
 -No NULL values in key columns
 -Legitimate duplicates preserved
 -Exact duplicate rows removed
