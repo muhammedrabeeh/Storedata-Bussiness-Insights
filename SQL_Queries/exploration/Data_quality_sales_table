@@ -1,0 +1,40 @@
+Null value check 
+SELECT COUNT(*) FROM sales WHERE customer_id IS NULL;
+-No null value found 
+
+Duplicate Detection
+-Identified duplicate product entries to understand data repetition patterns.
+SELECT product_id, COUNT(*)
+FROM sales
+GROUP BY product_id
+HAVING COUNT(*) > 1;
+
+duplicate validation
+select * from sales where customer_04id ='DV-135';
+-Duplicates were reviewed and confirmed as legitimate business records
+
+The table did not contain a unique identifier.
+-A surrogate primary key was added to uniquely identify each record and support Power BI relationships.
+
+alter table sales 
+Add column unique_id serial primary key;
+
+Exact Duplicate Removal
+-Removed only exact duplicate rows based on key transactional columns, while preserving genuine records.
+
+DELETE FROM sales a
+USING sales b
+WHERE a.unique_id > b.unique_id
+  AND a.product_id = b.product_id
+  AND a.customer_id = b.customer_id
+  AND a.sales = b.sales
+  AND a.discount = b.discount
+  AND a.profit = b.profit;
+
+Invalid Value Check
+SELECT * FROM sales WHERE quantity <= 0 OR sales <= 0;
+
+Data type check 
+SELECT column_name, data_type
+FROM information_schema.columns
+WHERE table_name = 'sales';
