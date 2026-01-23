@@ -1,0 +1,53 @@
+Combines customer + sales + product
+SELECT
+    c.Order_Date,        
+    c.Ship_Date,   
+    c.Ship_Mode,
+    c.Customer_ID,     
+    c.Customer_Name,
+    c.Segment,
+    c.Region,
+    c.State,
+    p.Product_ID,        
+    p.Category,
+    p.Sub_Category,
+    p.Product_Name,
+    s.Sales,            
+    s.Profit,
+    s.Quantity,
+    s.Discount
+FROM sales s
+JOIN customer c
+    ON s.Customer_ID = c.Customer_ID
+JOIN product p
+    ON s.Product_ID = p.Product_ID
+WHERE s.Sales >= 0;
+
+CUSTOMER LIFETIME VALUE
+CREATE VIEW vw_customer_lifetime AS
+SELECT
+    customer_id,
+    Customer_Name,
+    segment,
+    region,
+    SUM(SALES) AS lifetime_sales,
+    SUM(profit) AS lifetime_profit,
+    COUNT(DISTINCT customer_id) AS total_orders
+FROM vw_sales_fact
+GROUP BY customer_id, Customer_Name, segment, region;
+
+
+PRODUCT PROFITABILITY
+CREATE VIEW vw_product_performance AS
+SELECT
+    product_id,
+    Product_Name,
+    category,
+    Sub_Category,
+    SUM(sales) AS total_sales,
+    SUM(profit) AS total_profit,
+    SUM(quantity) AS total_quantity,
+    AVG(discount) AS avg_discount
+FROM vw_sales_fact
+GROUP BY product_id, Product_Name, category, Sub_Category;
+
