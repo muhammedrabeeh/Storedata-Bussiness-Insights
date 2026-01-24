@@ -1,4 +1,18 @@
+Overall Sales and Profit Summary
+
 SELECT
     SUM(sales_amount) AS total_sales,
     SUM(profit) AS total_profit
+FROM sales;
+
+-This query calculates the overall sales and total profit from the sales dataset.
+-Gives a high-level business overview
+-Used for KPI cards in Power BI
+-Helps stakeholders quickly understand overall performance
+-Sales and profit columns contain valid numeric values
+-No grouping is required since this is a summary-level analysis
+
+Profit margin 
+SELECT
+  SUM(profit) / NULLIF(SUM(sales), 0) AS profit_margin
 FROM sales;
