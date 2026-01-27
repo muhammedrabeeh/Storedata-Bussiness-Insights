@@ -1,40 +1,61 @@
-# Superstore Sales Performance Analysis
+storedata Sales Performance Analysis
 
-Project Overview
-This project analyzes sales, profit, and returns data from a retail superstore to understand business performance across regions, categories, and time.
-The goal is to identify key trends, profitability drivers, and areas for improvement using SQL, Excel, and Power BI.
+-Project Overview:
+This project analyzes sales and profitability performance of a retail superstore using historical order data from 2014 to 2017.
+The objective is to understand business growth trends, identify top-performing and underperforming regions and products, and uncover profitability risks that can support better decision-making.
 
- Business Questions
-- What are the total sales and profit?
-- Which regions and categories perform best?
-- How do sales and profit change over time?
-- Which orders are returned and how do returns affect profit?
-- How does performance vary by regional manager?
+The analysis was performed using SQL for data analysis, Excel,power query for initial data cleaning and  validation, and Power BI, DAX for interactive visualization and business storytelling.
 
-**Source:** Superstore dataset (Excel)
+-Business Questions:
+How have sales and profit evolved over time?
+Which regions and product categories drive the most revenue?
+Which products contribute most to profit, and which generate losses?
+Are there seasonal patterns in sales performance?
+Does higher discounting improve profitability?
 
- Data Preparation (Excel)
-- Reviewed data for missing and duplicate values
-- Checked date formats and numeric fields
-- Understood relationships between Orders, Returns, and People
+-Data Source
+Dataset: Stordata Dataset
+Format: Excel
+Key Tables: customer , product, sales 
 
- SQL Analysis (PostgreSQL)
-- Aggregated sales and profit metrics
-- Analyzed performance by region, category, and segment
-- Identified returned orders using joins
-- Created time-based sales trends
+- Data Preparation (Excel):
+Reviewed the dataset for missing and duplicate values
+Validated date formats and numeric fields (sales, profit, discount)
+Performed an initial understanding of key dimensions such as region, category, and sub-category
+Ensured the data was ready for SQL-based analysis
 
- Power BI Dashboard
-The dashboard includes:
-- KPI cards for Sales, Profit, and Returns
-- Sales and profit trends over time
-- Regional and category-wise performance
-- Filters for region and category
+-SQL Analysis (PostgreSQL):
+SQL was used to perform structured analysis and generate insights, including:
+Aggregation of total sales and profit by year
+Regional performance analysis
+Category and sub-category profitability analysis
+Identification of loss-making products
+Monthly sales trend and seasonality analysis
+Use of joins, aggregations, window functions, and views to support analysis and reporting
+The SQL queries are organized and documented in the sql/ folder.
 
- Key Insights
-- Certain regions generate high sales but low profit
-- Returned orders have a noticeable impact on profitability
-- A small number of categories generate most revenue
+-Power BI Dashboard:
+An interactive Power BI dashboard was built to visualize key findings and support business interpretation.
+DAX used to find the profit margin
 
-Conclusion
-This analysis helps stakeholders understand sales performance and identify opportunities to improve profitability and reduce returns.
+-The dashboard includes:
+KPI cards for Total Sales, Total Profit, and Profit Margin
+Year-over-year sales and profit trends (2014–2017)
+Regional and category-wise performance comparisons
+Product-level profitability analysis
+Monthly sales trends highlighting seasonality
+Filters for region and category to enable dynamic analysis
+
+-Key Insights:
+Sales and profit increased consistently from 2014 to 2017, indicating steady business growth
+Total sales grew from $3.37M to $5.86M, while profit increased from $434K to $721K
+The West region is the highest revenue-generating region, while the South underperforms
+Technology is the top-performing category by sales
+Canon Image Class is the most profitable and highest-selling product
+Tables and Bookcases are consistently loss-making despite generating sales
+Sales peak during November and December, while February and March show lower demand
+Higher discounts do not consistently lead to higher profitability
+
+- Conclusion
+This project highlights a business with strong overall growth, but also reveals profitability risks at the product and regional level.
+By focusing on high-margin products, improving underperforming regions, and optimizing discount strategies, the company can further improve profitability and reduce risk.
