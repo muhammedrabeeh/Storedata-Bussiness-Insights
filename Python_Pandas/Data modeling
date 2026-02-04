@@ -1,12 +1,19 @@
 sales_product.groupby("Category")["Profit"].sum().reset_index()
 
+Business wants to know which category makes money
+GroupBy answers aggregation questions
+
 sales_product.head()
+Shows first 5 rows
 
 full_data = (
     sales
     .merge(product, on="Product ID", how="left")
     .merge(customer, on="Customer ID", how="left")
 )
+Creates one analytical table
+Sales is the fact table
+Product & Customer are dimension tables
 
 category_perf = (
     full_data
@@ -14,14 +21,15 @@ category_perf = (
     .sum()
     .reset_index()
 )
+Aggregates Sales & Profit by Category
+
 
 full_data.groupby("Product Name")["Profit"].sum()
-
 full_data.groupby("discount")["profit"].mean()
-
 full_data.groupby(["category","discount"])["profit"].sum()
-
 full_data.groupby(["product_name","discount"])["profit"].sum()
+
+Profit impact of discounts at product level
 
 loss_products = (
     full_data
@@ -32,6 +40,11 @@ loss_products = (
     .sort_values("profit")
 )
 
+Filter high discounts (≥30%)
+Group by category + product
+Calculate total loss
+Sort worst to best
+
 segment_loss = (
     full_data
     [full_data["discount"] >= 0.30]
@@ -40,3 +53,6 @@ segment_loss = (
     .reset_index()
     .sort_values("profit")
 )
+
+Finds which customer segment loses money under high discounts
+
