@@ -24,3 +24,7 @@ full_data = full_data.apply(pd.to_numeric, errors="coerce")
 
 full_data["order_date"] = pd.to_datetime(full_data["order_date"])
 full_data["ship_date"] = pd.to_datetime(full_data["ship_date"])
+
+full_data.columns =full_data.columns.str.lower().str.replace(" ","_")
+
+pd.options.display.float_format='{:,.2F}'.format
