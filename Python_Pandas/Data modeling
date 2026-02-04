@@ -1,0 +1,42 @@
+sales_product.groupby("Category")["Profit"].sum().reset_index()
+
+sales_product.head()
+
+full_data = (
+    sales
+    .merge(product, on="Product ID", how="left")
+    .merge(customer, on="Customer ID", how="left")
+)
+
+category_perf = (
+    full_data
+    .groupby("Category")[["Sales", "Profit"]]
+    .sum()
+    .reset_index()
+)
+
+full_data.groupby("Product Name")["Profit"].sum()
+
+full_data.groupby("discount")["profit"].mean()
+
+full_data.groupby(["category","discount"])["profit"].sum()
+
+full_data.groupby(["product_name","discount"])["profit"].sum()
+
+loss_products = (
+    full_data
+    [full_data["discount"] >= 0.30]
+    .groupby(["category", "product_name"])["profit"]
+    .sum()
+    .reset_index()
+    .sort_values("profit")
+)
+
+segment_loss = (
+    full_data
+    [full_data["discount"] >= 0.30]
+    .groupby("segment")["profit"]
+    .sum()
+    .reset_index()
+    .sort_values("profit")
+)
